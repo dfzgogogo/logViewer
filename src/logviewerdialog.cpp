@@ -30,6 +30,8 @@ static const QStringList TABLE_HEADERS{
     QStringLiteral("附件")
 };
 
+static const int DEFAULT_SEARCH_DAYS = 1;   // initial time-range window
+
 // ---------------------------------------------------------------------------
 LogViewerDialog::LogViewerDialog(const QString &logDirectory, QWidget *parent)
     : QDialog(parent), m_logDir(logDirectory), m_worker(nullptr)
@@ -58,7 +60,7 @@ void LogViewerDialog::buildUi()
     topBar->setSpacing(6);
 
     topBar->addWidget(new QLabel(QStringLiteral("开始时间:"), this));
-    m_fromEdit = new QDateTimeEdit(QDateTime::currentDateTime().addDays(-1), this);
+    m_fromEdit = new QDateTimeEdit(QDateTime::currentDateTime().addDays(-DEFAULT_SEARCH_DAYS), this);
     m_fromEdit->setDisplayFormat(QStringLiteral("yyyy-MM-dd HH:mm:ss"));
     m_fromEdit->setCalendarPopup(true);
     topBar->addWidget(m_fromEdit);
